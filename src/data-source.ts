@@ -19,7 +19,7 @@ export const AppDataSource = new DataSource({
   username: process.env.POSTGRES_USER || process.env.DB_USERNAME,
   password: process.env.POSTGRES_PASSWORD || process.env.DB_PASSWORD,
   database: process.env.POSTGRES_DATABASE || process.env.DB_DATABASE,
-   requestTimeout: 60000,
+   // requestTimeout: 60000,
   // entities: ['entities/**/*.entity{.ts,.js}', 'entities/**/*.schema{.ts,.js}'],
   entities: [
     Category, 
