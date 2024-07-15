@@ -9,7 +9,8 @@
   "scripts": {
     "start": "ts-node ./bin/www.ts",
     "dev": "ts-node-dev --respawn  --transpile-only --exit-child bin/www.ts",
-    "build": "tsc",
+    "build": "npx tsc",
+    "postinstall": "tsc",
     "migration": "typeorm migration:run"
   },
   "dependencies": {
