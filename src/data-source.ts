@@ -33,7 +33,7 @@ export const AppDataSource = new DataSource({
     },
     statement_timeout: 60000, // Thời gian chờ 60 giây
   },
-  synchronize: false,
+  synchronize: true,
   logging: true,
-  dropSchema: false,
+  dropSchema: true,
 });
