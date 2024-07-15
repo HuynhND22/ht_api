@@ -13,6 +13,7 @@ exports.CategoryView = void 0;
 const typeorm_1 = require("typeorm");
 let CategoryView = class CategoryView extends typeorm_1.BaseEntity {
 };
+exports.CategoryView = CategoryView;
 __decorate([
     (0, typeorm_1.ViewColumn)({ name: 'Id' }),
     __metadata("design:type", Number)
@@ -29,9 +30,8 @@ __decorate([
     (0, typeorm_1.ViewColumn)({ name: 'Count' }),
     __metadata("design:type", Number)
 ], CategoryView.prototype, "count", void 0);
-CategoryView = __decorate([
+exports.CategoryView = CategoryView = __decorate([
     (0, typeorm_1.ViewEntity)({
         expression: `SELECT C.*, (SELECT COUNT(*) FROM Products AS P WHERE P.categoryId = C.Id) AS Count FROM Categories AS C`,
     })
 ], CategoryView);
-exports.CategoryView = CategoryView;

@@ -1,0 +1,21 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = __importDefault(require("express"));
+const book_controller_1 = __importDefault(require("../controllers/book.controller"));
+// import validateProduct from '../middleware/validators/productsValidator';
+const router = express_1.default.Router();
+router.get('/all', book_controller_1.default.getAll);
+router.get('/client', book_controller_1.default.client);
+router.get('/id/:id', book_controller_1.default.getById);
+router.get('/category/:categoryId', book_controller_1.default.getByCategory);
+router.post('/create/', book_controller_1.default.create);
+router.patch('/update/:id', book_controller_1.default.update);
+router.delete('/remove/:id', book_controller_1.default.softDelete);
+router.get('/deleted/', book_controller_1.default.getDeleted);
+router.post('/restore', book_controller_1.default.restore);
+router.delete('/delete/:id', book_controller_1.default.hardDelete);
+router.get('/check/unique', book_controller_1.default.checkProductUnique);
+exports.default = router;

@@ -17,8 +17,6 @@ const userSchema = (0, yup_1.object)().shape({
     email: (0, yup_1.string)().email('Email is invalid').required('Email must be required'),
     phoneNumber: (0, yup_1.string)().notRequired().max(10, 'Phone number must be 10 characters').matches(/^[0-9]+$/, 'Phone number must be a number'),
     address: (0, yup_1.string)().notRequired(),
-    wardId: (0, yup_1.string)().notRequired(),
-    statusId: (0, yup_1.number)().required('Status must be required').typeError('Status must be a number'),
     role: (0, yup_1.string)().required('Role must be required').oneOf(['Quản trị viên', 'Nhân viên'], 'Role must be either "Quản trị viên" or "Nhân viên'),
 });
 const validateUser = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {

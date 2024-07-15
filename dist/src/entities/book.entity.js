@@ -18,77 +18,60 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.User = void 0;
+exports.Book = void 0;
 const typeorm_1 = require("typeorm");
 const class_validator_1 = require("class-validator");
-let User = class User extends typeorm_1.BaseEntity {
+const category_entity_1 = require("./category.entity");
+let Book = class Book extends typeorm_1.BaseEntity {
     // HOOKS (AUTO VALIDATE)
     validate() {
         return __awaiter(this, void 0, void 0, function* () {
-            // Validation logic here, if needed
+            yield (0, class_validator_1.validateOrReject)(this);
         });
     }
 };
-exports.User = User;
+exports.Book = Book;
 __decorate([
-    (0, typeorm_1.PrimaryGeneratedColumn)({ primaryKeyConstraintName: 'userId' }),
+    (0, typeorm_1.PrimaryGeneratedColumn)({ primaryKeyConstraintName: 'bookId' }),
     __metadata("design:type", Number)
-], User.prototype, "userId", void 0);
+], Book.prototype, "bookId", void 0);
 __decorate([
     (0, class_validator_1.IsNotEmpty)(),
-    (0, typeorm_1.Column)({ type: 'varchar', length: 255 }),
-    __metadata("design:type", String)
-], User.prototype, "firstName", void 0);
-__decorate([
-    (0, class_validator_1.IsNotEmpty)(),
-    (0, typeorm_1.Column)({ type: 'varchar', length: 255 }),
-    __metadata("design:type", String)
-], User.prototype, "lastName", void 0);
-__decorate([
-    (0, typeorm_1.Column)({ type: 'varchar', length: 255, nullable: true }),
-    __metadata("design:type", String)
-], User.prototype, "fullName", void 0);
-__decorate([
-    (0, typeorm_1.Column)({ type: 'varchar', length: 11, default: 'Nam' }),
-    (0, class_validator_1.IsIn)(['Nam', 'Nữ']),
-    __metadata("design:type", String)
-], User.prototype, "gender", void 0);
-__decorate([
     (0, typeorm_1.Column)({ unique: true, type: 'varchar', length: 255 }),
     __metadata("design:type", String)
-], User.prototype, "email", void 0);
+], Book.prototype, "name", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ type: 'varchar', length: 255, nullable: true }),
+    (0, typeorm_1.Column)({ type: 'varchar', nullable: true }),
     __metadata("design:type", String)
-], User.prototype, "password", void 0);
+], Book.prototype, "url", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ type: 'varchar', length: 15, nullable: true }),
-    __metadata("design:type", String)
-], User.prototype, "phoneNumber", void 0);
-__decorate([
-    (0, typeorm_1.Column)({ type: 'varchar', length: 20, default: 'Thành viên' }),
-    (0, class_validator_1.IsIn)(['Quản trị viên', 'Thành viên']),
-    __metadata("design:type", String)
-], User.prototype, "role", void 0);
+    (0, typeorm_1.Column)({ type: 'int', nullable: true }),
+    __metadata("design:type", Number)
+], Book.prototype, "categoryId", void 0);
 __decorate([
     (0, typeorm_1.CreateDateColumn)({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' }),
     __metadata("design:type", Date)
-], User.prototype, "createdAt", void 0);
+], Book.prototype, "createdAt", void 0);
 __decorate([
     (0, typeorm_1.UpdateDateColumn)({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP', nullable: true, onUpdate: 'CURRENT_TIMESTAMP' }),
     __metadata("design:type", Date)
-], User.prototype, "updatedAt", void 0);
+], Book.prototype, "updatedAt", void 0);
 __decorate([
     (0, typeorm_1.DeleteDateColumn)({ type: 'timestamp', nullable: true }),
     __metadata("design:type", Date)
-], User.prototype, "deletedAt", void 0);
+], Book.prototype, "deletedAt", void 0);
+__decorate([
+    (0, typeorm_1.ManyToOne)(() => category_entity_1.Category, (c) => c.books),
+    (0, typeorm_1.JoinColumn)({ name: 'categoryId' }),
+    __metadata("design:type", category_entity_1.Category)
+], Book.prototype, "category", void 0);
 __decorate([
     (0, typeorm_1.BeforeInsert)(),
     (0, typeorm_1.BeforeUpdate)(),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
-], User.prototype, "validate", null);
-exports.User = User = __decorate([
-    (0, typeorm_1.Entity)({ name: 'Users' })
-], User);
+], Book.prototype, "validate", null);
+exports.Book = Book = __decorate([
+    (0, typeorm_1.Entity)({ name: 'Book' })
+], Book);

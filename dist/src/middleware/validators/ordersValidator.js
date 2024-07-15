@@ -11,9 +11,9 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const yup_1 = require("yup");
 const orderSchema = (0, yup_1.object)().shape({
-    tableId: (0, yup_1.number)().required('TableId must be required').typeError('TableId must be a number'),
+    tableId: (0, yup_1.number)().required('tableId must be required').typeError('TableId must be a number'),
     userId: (0, yup_1.number)().typeError('UserId must be a number'),
-    statusId: (0, yup_1.number)().typeError('StatusId must be a number').required('StatusId must be required'),
+    statusId: (0, yup_1.number)().typeError('StatusId must be a number'),
     payment: (0, yup_1.string)().typeError('Payment must be a string').required('Payment must be required').oneOf(['Tiền mặt', 'Ngân hàng'], 'Payment must be either "Tiền mặt" or "Ngân hàng"'),
 });
 const validateOrder = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {

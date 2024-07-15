@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getDeviceId = void 0;
+exports.getDeviceId = getDeviceId;
 function makeDeviceId(t) {
     let e = "", n = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789", o = n.length;
     for (let i = 0; i < t; i++)
@@ -10,4 +10,3 @@ function makeDeviceId(t) {
 function getDeviceId() {
     return makeDeviceId(45);
 }
-exports.getDeviceId = getDeviceId;

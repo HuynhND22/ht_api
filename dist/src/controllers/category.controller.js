@@ -20,9 +20,9 @@ const handleUniqueError_1 = require("../helpers/handleUniqueError");
 const repository = data_source_1.AppDataSource.getRepository(category_entity_1.Category);
 const getAll = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const categories = yield repository.find();
+        const categories = yield repository.find({ where: { parent: (0, typeorm_1.IsNull)() }, order: { createdAt: 'DESC' }, relations: ['children'] });
         if (categories.length === 0) {
-            res.status(204).send({
+            return res.status(204).send({
                 error: 'No content',
             });
         }
@@ -95,7 +95,7 @@ const softDelete = (req, res, next) => __awaiter(void 0, void 0, void 0, functio
 });
 const getDeleted = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const categories = yield repository.find({ withDeleted: true, where: { deletedAt: (0, typeorm_1.Not)((0, typeorm_1.IsNull)()) } });
+        const categories = yield repository.find({ withDeleted: true, where: { deletedAt: (0, typeorm_1.Not)((0, typeorm_1.IsNull)()), parent: (0, typeorm_1.IsNull)() }, order: { deletedAt: 'DESC' }, relations: ['children'] });
         if (categories.length === 0) {
             res.status(204).send({
                 error: 'No content',
@@ -111,12 +111,14 @@ const getDeleted = (req, res, next) => __awaiter(void 0, void 0, void 0, functio
     }
 });
 const restore = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    const id = parseInt(req.body.categoryId);
+    console.log(id);
     try {
-        const category = yield repository.findOne({ withDeleted: true, where: { categoryId: parseInt(req.params.id), deletedAt: (0, typeorm_1.Not)((0, typeorm_1.IsNull)()) } });
+        const category = yield repository.findOne({ withDeleted: true, where: { categoryId: id, deletedAt: (0, typeorm_1.Not)((0, typeorm_1.IsNull)()) } });
         if (!category) {
             return res.status(410).json({ error: 'Not found' });
         }
-        yield repository.restore({ categoryId: parseInt(req.params.id) });
+        yield repository.restore({ categoryId: id });
         res.status(200).send();
     }
     catch (error) {
@@ -131,7 +133,7 @@ const hardDelete = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
             return res.status(410).json({ error: 'Not found' });
         }
         yield repository.delete({ categoryId: parseInt(req.params.id) });
-        res.status(200).send();
+        res.sendStatus(200);
     }
     catch (error) {
         console.error(error);

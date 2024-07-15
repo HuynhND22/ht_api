@@ -1,0 +1,21 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = __importDefault(require("express"));
+const post_controller_1 = __importDefault(require("../controllers/post.controller"));
+// import validateProduct from '../middleware/validators/productsValidator';
+const router = express_1.default.Router();
+router.get('/all', post_controller_1.default.getAll);
+router.get('/client', post_controller_1.default.client);
+router.get('/id/:id', post_controller_1.default.getById);
+router.get('/category/:categoryId', post_controller_1.default.getByCategory);
+router.post('/create/', post_controller_1.default.create);
+router.patch('/update/:id', post_controller_1.default.update);
+router.delete('/remove/:id', post_controller_1.default.softDelete);
+router.get('/deleted/', post_controller_1.default.getDeleted);
+router.post('/restore/:id', post_controller_1.default.restore);
+router.delete('/delete/:id', post_controller_1.default.hardDelete);
+router.get('/check/unique', post_controller_1.default.checkProductUnique);
+exports.default = router;

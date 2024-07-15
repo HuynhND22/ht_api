@@ -31,6 +31,7 @@ let Cart = class Cart extends typeorm_1.BaseEntity {
         });
     }
 };
+exports.Cart = Cart;
 __decorate([
     (0, typeorm_1.PrimaryColumn)({ name: 'tableId' }),
     __metadata("design:type", Number)
@@ -70,7 +71,6 @@ __decorate([
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
 ], Cart.prototype, "validate", null);
-Cart = __decorate([
+exports.Cart = Cart = __decorate([
     (0, typeorm_1.Entity)({ name: 'Carts' })
 ], Cart);
-exports.Cart = Cart;

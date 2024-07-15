@@ -12,7 +12,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getHistories = exports.handleLogin = void 0;
+exports.handleLogin = handleLogin;
+exports.getHistories = getHistories;
 const axios_1 = __importDefault(require("axios"));
 const axios_retry_1 = __importDefault(require("axios-retry"));
 const moment_timezone_1 = __importDefault(require("moment-timezone"));
@@ -60,7 +61,6 @@ function handleLogin(username, password, deviceId) {
         }
     });
 }
-exports.handleLogin = handleLogin;
 function getHistories(token, accountId, deviceId) {
     return __awaiter(this, void 0, void 0, function* () {
         const fromDate = (0, moment_timezone_1.default)().tz('Asia/Ho_Chi_Minh').format('YYYYMMDD hh:mm:ss');
@@ -108,4 +108,3 @@ function getHistories(token, accountId, deviceId) {
         }
     });
 }
-exports.getHistories = getHistories;

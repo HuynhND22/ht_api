@@ -10,14 +10,14 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const yup_1 = require("yup");
-const tableSchema = (0, yup_1.object)().shape({
-    name: (0, yup_1.string)().required('Name must be required'),
-    seat: (0, yup_1.number)().required('Seat must be required').typeError('Seat must be a number'),
-    statusId: (0, yup_1.number)().notRequired()
+const bankSchema = (0, yup_1.object)().shape({
+    accountNumber: (0, yup_1.string)().required('Account number must be required'),
+    author: (0, yup_1.string)().required('Author must be required'),
+    bankName: (0, yup_1.string)().required('Bank name must be required')
 });
-const validateTable = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+const validateBank = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        yield tableSchema.validate(req.body, { abortEarly: false });
+        yield bankSchema.validate(req.body, { abortEarly: false });
         next();
     }
     catch (error) {
@@ -25,4 +25,4 @@ const validateTable = (req, res, next) => __awaiter(void 0, void 0, void 0, func
         return res.status(400).send(error.errors);
     }
 });
-exports.default = validateTable;
+exports.default = validateBank;

@@ -20,7 +20,7 @@ const handleUniqueError_1 = require("../helpers/handleUniqueError");
 const repository = data_source_1.AppDataSource.getRepository(user_entity_1.User);
 const getAll = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const users = yield repository.find();
+        let users = yield repository.find({ order: { createdAt: 'DESC' }, select: ['userId', 'firstName', 'lastName', 'gender', 'email', 'phoneNumber', 'role', 'createdAt', 'updatedAt', 'deletedAt'] });
         if (users.length === 0) {
             return res.status(204).json({
                 error: 'No content',
@@ -83,8 +83,10 @@ const update = (req, res, next) => __awaiter(void 0, void 0, void 0, function* (
             return res.status(410).json({ error: 'Not found' });
         }
         let data = req.body;
-        const hashedPassword = yield bcrypt.hash(req.body.password, saltRounds);
-        data['password'] = hashedPassword;
+        if (data.password) {
+            const hashedPassword = yield bcrypt.hash(req.body.password, saltRounds);
+            data['password'] = hashedPassword;
+        }
         Object.assign(user, data);
         yield repository.save(user);
         return res.json(user);
