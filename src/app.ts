@@ -31,6 +31,20 @@ AppDataSource.initialize().then(async () => {
   // use cors
   app.use(cors({ origin: '*' }));
 
+  const allowedOrigins = ['https://ht-admin-two.vercel.app', 'http://example2.com']; // Thay thế bằng các domain mà bạn muốn cho phép
+  app.use(cors({
+    origin: (origin:any, callback:any) => {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error('Not allowed by CORS'));
+      }
+    },
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],
+    credentials: true,
+  }));
+
   // app.use(express.json());
   // app.use(express.urlencoded());
 
