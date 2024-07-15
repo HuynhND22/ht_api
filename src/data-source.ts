@@ -28,9 +28,7 @@ export const AppDataSource = new DataSource({
     Book
   ],
   extra: {
-    ssl: {
-      rejectUnauthorized: false, // Không kiểm tra chứng chỉ
-    },
+    ssl: true,
     statement_timeout: 60000, // Thời gian chờ 60 giây
   },
   synchronize: true,
