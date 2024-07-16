@@ -7,7 +7,6 @@
     "node": "20.x"
   },
   "scripts": {
-    "prebuild": "chmod +x ./bin/www.ts",
     "build": "npx tsc",
     "start": "npx ts-node/register ./dist/bin/www.ts",
     "dev": "ts-node-dev --respawn  --transpile-only --exit-child bin/www.ts",
